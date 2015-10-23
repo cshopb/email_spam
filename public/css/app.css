@@ -1,0 +1,16 @@
+.page-header {
+  margin-top: 1em;
+  margin-bottom: 0;
+  padding-bottom: 1em;
+  text-align: center;
+  line-height: 1;
+  border-bottom: none; }
+  .page-header:after {
+    content: '';
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: #006dcc;
+    margin: 40px auto 0; }
+
+/*# sourceMappingURL=app.css.map */

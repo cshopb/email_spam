@@ -36,4 +36,25 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+
+
+    /**
+     * A user may create many customers.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function customers()
+    {
+        return $this->hasMany('App\Customer');
+    }
+
+    /**
+     * A user may have many emails trough customer.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function emails()
+    {
+        return $this->hasManyThrough('App\Email', 'App\Customer');
+    }
 }
