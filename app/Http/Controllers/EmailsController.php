@@ -167,33 +167,16 @@ class EmailsController extends Controller {
         for ($email_no = 0; $email_no < count($emails); $email_no++)
         {
             $email_status[$email_no] = (filter_var($emails[$email_no], FILTER_VALIDATE_EMAIL)) ? 'isEmail' : 'notEmail';
-
-            if ($this->emailExists($customer_id, $list_to_check, $emails[$email_no]) != null)
+            // This was the only way I knew how to make it an array and not a collection. With lists->all.
+            $email_exists = Auth::user()->emails()->Exists($customer_id, $list_to_check, $emails[$email_no])
+                            ->get()->lists('email')->all();
+            if ($email_exists != null)
             {
                 $email_status[$email_no] = 'emailExists';
             }
         }
 
         return $email_status;
-    }
-
-    /**
-     * Tries to get the email provided from the provided list.
-     *
-     * @param $customer_id
-     * @param $list_to_check
-     * @param $email_to_check
-     * @return mixed
-     */
-    private function emailExists($customer_id, $list_to_check, $email_to_check)
-    {
-        // This was the only way I knew how to make it an array and not a collection.
-        $result = Auth::user()->emails()
-            ->where('customer_id', '=', $customer_id)
-            ->where('list', '=', $list_to_check)
-            ->where('email', '=', $email_to_check)->lists('email')->all();
-
-        return $result;
     }
 
     /**
