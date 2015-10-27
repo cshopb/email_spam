@@ -147,6 +147,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+         * My Service Providers...
+         */
+        Email_spam\Search\SearchServiceProvider::class,
+
     ],
 
     /*
@@ -198,6 +203,10 @@ return [
         'Form'      => Illuminate\Html\FormFacade::class,
         'Html'      => Illuminate\Html\HtmlFacade::class,
 
+        /*
+         * My Facades...
+         */
+        'Search'    => Email_spam\Facades\Search::class,
     ],
 
 ];

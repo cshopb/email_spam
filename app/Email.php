@@ -56,4 +56,19 @@ class Email extends Eloquent {
             ->where('list', $list_to_check)
             ->where('email', $email_to_check);
     }
+
+    /**
+     * Search in emails if there is an email like the provided search query.
+     *
+     * @param $query
+     * @param $search
+     */
+    public function scopeSearch($query, $search)
+    {
+        // http://www.brainbell.com/tutorials/MySQL/Using_The_LIKE_Operator.htm
+        // http://stackoverflow.com/questions/15042197/access-variables-from-parent-scope-in-anonymous-php-function
+        // http://php.net/manual/en/functions.anonymous.php
+
+        $query->where('email', 'LIKE', "%$search%");
+    }
 }

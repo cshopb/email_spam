@@ -25,8 +25,28 @@ class Customer extends Eloquent {
         return $this->belongsTo('App\User');
     }
 
+    /**
+     * A customer has many emails
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function emails()
     {
         return $this->hasMany('App\Email');
+    }
+
+    /**
+     * Search in customers if there is a name like the provided search query.
+     *
+     * @param $query
+     * @param $search
+     */
+    public function scopeSearch($query, $search)
+    {
+        // http://www.brainbell.com/tutorials/MySQL/Using_The_LIKE_Operator.htm
+        // http://stackoverflow.com/questions/15042197/access-variables-from-parent-scope-in-anonymous-php-function
+        // http://php.net/manual/en/functions.anonymous.php
+
+            $query->where('name', 'LIKE', "%$search%");
     }
 }

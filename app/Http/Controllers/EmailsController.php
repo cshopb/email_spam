@@ -107,7 +107,7 @@ class EmailsController extends Controller {
 
     /**
      * Accepts the AJAX request and dynamically checks if the email in the input box
-     * is still valid and if it exists in the other list.
+     * is still properly formatted and if it exists in the other list.
      *
      * @param Request $request
      * @return string
