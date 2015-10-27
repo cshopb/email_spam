@@ -191,13 +191,13 @@ class EmailsController extends Controller {
     {
         // White list elements
         $name_white_list = 'white list';
-        $button_white_list = 'btn btn-primary';
-        $panel_white_list = 'panel panel-primary';
+        $button_white_list = 'btn btn-default';
+        $panel_white_list = 'panel panel-default';
 
         // Black list elements
         $name_black_list = 'black list';
-        $button_black_list = 'btn btn-info';
-        $panel_black_list = 'panel panel-info';
+        $button_black_list = 'btn btn-primary';
+        $panel_black_list = 'panel panel-primary';
 
         //glyphicons
         $glyphicon_isEmail = 'glyphicon-ok';

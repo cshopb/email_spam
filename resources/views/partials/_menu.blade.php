@@ -1,5 +1,5 @@
 <!-- the menu -->
-<div class="navbar navbar-inverse navbar-static-top">
+<div class="navbar navbar-default navbar-static-top">
     <div class="container">
         <!-- text that will appear as the name of the menu -->
         <a href="/" class="navbar-brand">

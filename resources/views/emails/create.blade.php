@@ -39,7 +39,7 @@
 
         <!-- Add Emails Form Input -->
         <div class="form-group">
-            {!! Form::submit('Add Emails', ['class' => 'btn btn-primary form-control']) !!}
+            {!! Form::submit('Add Emails', ['class' => 'btn btn-success form-control']) !!}
         </div>
 
     {!! Form::close() !!}

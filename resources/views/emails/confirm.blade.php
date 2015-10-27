@@ -7,7 +7,7 @@
 
     <div class='{!! $panel !!}'>
         <div class="panel-heading">
-            The e-mails for the {{ $customer_name }} customer will be added to the {{ $list_type }}
+            The e-mails for the <b>{{ $customer_name }}</b> customer will be added to the <b>{{ $list_type }}</b>.
         </div>
         <div class="panel-body">
             @include('emails.partials._emailTextFields')

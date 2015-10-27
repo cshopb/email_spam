@@ -19,6 +19,7 @@ elixir(function(mix) {
         'vendor/select2.css',
         'vendor/select2-bootstrap.css',
         'vendor/jquery-ui.css',
+        'vendor/flatly-bootstrap-theme.css',
         'app.css'
     ], null, 'public/css')
 });
