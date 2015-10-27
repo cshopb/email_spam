@@ -1,4 +1,4 @@
-<?php namespace Email_spam\Search;
+<?php namespace App\Email_spam\Search;
 
 use App\Customer;
 use App\Email;

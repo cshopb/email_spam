@@ -150,7 +150,8 @@ return [
         /*
          * My Service Providers...
          */
-        Email_spam\Search\SearchServiceProvider::class,
+
+        App\Email_spam\Search\SearchServiceProvider::class,
 
     ],
 

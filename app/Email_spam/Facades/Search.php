@@ -1,9 +1,11 @@
-<?php namespace Email_spam\Facades;
+<?php
+
+namespace App\Email_spam\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Search extends Facade {
-
+class Search extends Facade
+{
     protected static function getFacadeAccessor()
     {
         return 'search';

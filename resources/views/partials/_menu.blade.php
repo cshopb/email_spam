@@ -30,6 +30,12 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    {!! Form::open ([]) !!}
+                        {!! Form::text('search', null, ['placeholder' => 'Search']) !!}
+                    {!! Form::close() !!}
+                </li>
+
                 @if ( ! Auth::user())
                     <li ><a href="/auth/login">Login</a></li>
                     <li ><a href="/auth/register">Register</a></li>

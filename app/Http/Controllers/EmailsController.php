@@ -7,10 +7,8 @@ use App\Email;
 use App\Http\Requests\CommitEmailsRequest;
 use App\Http\Requests\PrepareEmailsRequest;
 use Auth;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use PDOException;
 use Session;
 

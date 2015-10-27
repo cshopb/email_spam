@@ -1,6 +1,6 @@
 <?php
 
-namespace Email_spam\Search;
+namespace App\Email_spam\Search;
 
 use Illuminate\Support\ServiceProvider;
 
