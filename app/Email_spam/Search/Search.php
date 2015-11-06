@@ -1,18 +1,19 @@
-<?php namespace App\Email_spam\Search;
+<?php
 
-use App\Customer;
-use App\Email;
+namespace App\Email_spam\Search;
+
+use Auth;
 
 class Search {
 
     public function customers($search)
     {
-        return Customer::search($search)->get();
+        return Auth::user()->customers()->search($search)->get();
     }
 
     public function emails($search)
     {
-        return Email::search($search)->get();
+        return Auth::user()->emails()->search($search)->get();
     }
 
     public function all($search)

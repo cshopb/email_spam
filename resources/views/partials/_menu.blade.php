@@ -16,33 +16,38 @@
         <!-- this part will collapse when the resolution is small (i.e. on a mobile) -->
         <!-- the name of the collapsible menu is: collapseMenu -->
         <div class="collapse navbar-collapse" id="collapseMenu">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Test 2 <b class="caret"></b></a>
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Test 2 <b class="caret"></b></a>
 
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Drop Down 1</a></li>
-                        <li><a href="#">Drop Down 2</a></li>
-                    </ul>
-                </li>
-                <li ><a href="/emails">E-mails</a></li>
-                <li ><a href="/emails/create">Add E-mails</a></li>
-            </ul>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Drop Down 1</a></li>
+                            <li><a href="#">Drop Down 2</a></li>
+                        </ul>
+                    </li>
+                    <li ><a href="/emails">E-mails</a></li>
+                    <li ><a href="/emails/create">Add E-mails</a></li>
+                </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    {!! Form::open ([]) !!}
-                        {!! Form::text('search', null, ['placeholder' => 'Search']) !!}
-                    {!! Form::close() !!}
-                </li>
+                <ul class="nav navbar-nav navbar-right">
+                    <li >
+                        {!! Form::open (['role' => 'search', 'class' => 'navbar-form', 'action' => 'SearchController@index']) !!}
+                        <div class="has-feedback">
+                            <span class="glyphicon glyphicon glyphicon-search form-control-feedback"></span>
+                            {!! Form::text('search', null, ['placeholder' => 'Search', 'class' => 'form-control']) !!}
+                        </div>
+                        {!! Form::close() !!}
+                    </li >
 
-                @if ( ! Auth::user())
-                    <li ><a href="/auth/login">Login</a></li>
-                    <li ><a href="/auth/register">Register</a></li>
-                @else
-                    <li ><a href="/auth/logout">Logout</a></li>
-                @endif
-            </ul>
+                    @if ( ! Auth::user())
+                        <li ><a href="/auth/login">Login</a></li>
+                        <li ><a href="/auth/register">Register</a></li>
+                    @else
+                        <li ><a href="/auth/logout">Logout</a></li>
+                    @endif
+                </ul>
+            </div>
         </div>
     </div>
 </div>

@@ -16,6 +16,9 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 </head>
 <body>
+    <!-- This is the button for back to top -->
+    <!-- http://html-tuts.com/back-to-top-button-jquery/ -->
+    @include('partials._backToTopButton')
 
     @include('partials._menu')
 

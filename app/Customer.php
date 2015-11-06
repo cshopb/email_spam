@@ -3,7 +3,6 @@
 namespace App;
 
 use Eloquent;
-use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Eloquent {
 
@@ -47,6 +46,11 @@ class Customer extends Eloquent {
         // http://stackoverflow.com/questions/15042197/access-variables-from-parent-scope-in-anonymous-php-function
         // http://php.net/manual/en/functions.anonymous.php
 
-            $query->where('name', 'LIKE', "%$search%");
+            return $query->where('name', 'LIKE', "%$search%");
+    }
+
+    public function scopeName($query, $id)
+    {
+        return $query->where('id', $id)->lists('name');
     }
 }

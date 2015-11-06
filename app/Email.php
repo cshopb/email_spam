@@ -2,9 +2,7 @@
 
 namespace App;
 
-use Auth;
 use Eloquent;
-use Illuminate\Database\Eloquent\Model;
 
 class Email extends Eloquent {
 
@@ -69,6 +67,19 @@ class Email extends Eloquent {
         // http://stackoverflow.com/questions/15042197/access-variables-from-parent-scope-in-anonymous-php-function
         // http://php.net/manual/en/functions.anonymous.php
 
-        $query->where('email', 'LIKE', "%$search%");
+        return $query->where('email', 'LIKE', "%$search%");
+    }
+
+    /**
+     * When trying to get the list attribute the result will be in a readable format.
+     *
+     * @param $value
+     * @return string
+     */
+    public function getListAttribute($value)
+    {
+        $result = ucwords(str_replace('_', ' ', $value));
+
+        return $result;
     }
 }

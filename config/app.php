@@ -207,7 +207,7 @@ return [
         /*
          * My Facades...
          */
-        'Search'    => Email_spam\Facades\Search::class,
+        'Search'    => App\Email_spam\Facades\Search::class,
     ],
 
 ];

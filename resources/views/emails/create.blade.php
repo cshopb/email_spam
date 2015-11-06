@@ -20,12 +20,18 @@
         <!-- Name Form Input -->
         <div class="form-group">
             {!! Form::label('customer_name', 'Customer Name:') !!}
-            {!! Form::select('customer_name', $customers, null, ['id' => 'customer_id', 'class' => 'form-control']) !!}
+            <select name="customer_name" id="customer_id" class="form-control">
+                <!-- This is needed for the placeholder to show up -->
+                <option></option>
+                @foreach($customers as $key => $val)
+                    <option value="{{ $key }}">{{ $val }}</option>
+                @endforeach
+            </select>
         </div>
 
         <script>
             $('#customer_id').select2({
-                placeholder: 'Choose a customer',
+                placeholder: 'Select from existing or make a new one',
                 tags: true,
                 theme: 'bootstrap'
             });
@@ -34,7 +40,9 @@
         <!-- Email Form Input -->
         <div class="form-group">
             {!! Form::label('emails', 'Email:') !!}
-            {!! Form::text('emails', null, ['class' => 'form-control']) !!}
+            {!! Form::text('emails', null,
+                ['class' => 'form-control', 'placeholder' => 'Add emails. Separate with semicolons.'])
+            !!}
         </div>
 
         <!-- Add Emails Form Input -->

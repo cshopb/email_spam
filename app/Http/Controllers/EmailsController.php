@@ -23,13 +23,32 @@ class EmailsController extends Controller {
     }
 
     /**
-     * Show all emails.
+     * Show all emails for the logged in user and assign the customer name.
      *
+     * @param Request $request
      * @return string
      */
-    public function index()
+    public function index(request $request)
     {
-        return 'all emails';
+        $data = $request->input();
+
+        $customers_list = ['all' => '<ALL>']
+                        + Auth::user()->customers()->orderBy('name', 'asc')->lists('name', 'id')->all();
+
+        if ($data == null || $data['customer_id'] == 'all')
+        {
+            $customers = Auth::user()->customers()->orderBy('name', 'asc')->get();
+        } else
+        {
+            $customers = Auth::user()->customers()->where('id', $data['customer_id'])->get();
+        }
+
+        foreach ($customers as $customer)
+        {
+            $customer['emails'] = $customer->emails()->orderBy('list', 'desc')->get();
+        }
+
+        return view('emails.index', compact(['customers', 'customers_list']));
     }
 
     /**
@@ -39,7 +58,7 @@ class EmailsController extends Controller {
      */
     public function create()
     {
-        $customers = Customer::lists('name', 'name');
+        $customers = Auth::user()->customers()->lists('name', 'name');
 
         return view('emails.create', compact('customers'));
     }
@@ -167,7 +186,7 @@ class EmailsController extends Controller {
             $email_status[$email_no] = (filter_var($emails[$email_no], FILTER_VALIDATE_EMAIL)) ? 'isEmail' : 'notEmail';
             // This was the only way I knew how to make it an array and not a collection. With lists->all.
             $email_exists = Auth::user()->emails()->Exists($customer_id, $list_to_check, $emails[$email_no])
-                            ->get()->lists('email')->all();
+                ->get(['email'])->all();
             if ($email_exists != null)
             {
                 $email_status[$email_no] = 'emailExists';

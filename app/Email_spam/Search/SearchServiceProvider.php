@@ -9,6 +9,6 @@ class SearchServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->app->bind('search', 'Email_spam\Search\Search');
+        $this->app->bind('search', 'App\Email_spam\Search\Search');
     }
 }

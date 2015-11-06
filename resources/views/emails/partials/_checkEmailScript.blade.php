@@ -22,7 +22,7 @@
                     $parent.find('span').attr('class', 'glyphicon glyphicon-remove form-control-feedback');
                 } else if (emailType == 'emailExists') {
                     $parent.attr('class', 'form-group has-warning has-feedback');
-                    $parent.find('span').attr('class', 'glyphicon glyphicon-warning form-control-feedback');
+                    $parent.find('span').attr('class', 'glyphicon glyphicon-warning-sign form-control-feedback');
                 }
             },
             error: function () {
