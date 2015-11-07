@@ -49,6 +49,18 @@ class Customer extends Eloquent {
             return $query->where('name', 'LIKE', "%$search%");
     }
 
+    public function scopeList($query)
+    {
+        return $query->orderBy('name', 'asc')->lists('name', 'id');
+    }
+
+    /**
+     * Return the name of the customer when provided an ID.
+     *
+     * @param $query
+     * @param $id
+     * @return mixed
+     */
     public function scopeName($query, $id)
     {
         return $query->where('id', $id)->lists('name');

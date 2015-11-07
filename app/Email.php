@@ -69,17 +69,4 @@ class Email extends Eloquent {
 
         return $query->where('email', 'LIKE', "%$search%");
     }
-
-    /**
-     * When trying to get the list attribute the result will be in a readable format.
-     *
-     * @param $value
-     * @return string
-     */
-    public function getListAttribute($value)
-    {
-        $result = ucwords(str_replace('_', ' ', $value));
-
-        return $result;
-    }
 }

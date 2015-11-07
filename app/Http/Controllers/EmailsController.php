@@ -6,6 +6,7 @@ use App\Customer;
 use App\Email;
 use App\Http\Requests\CommitEmailsRequest;
 use App\Http\Requests\PrepareEmailsRequest;
+use App\Http\Requests\UpdateEmailsRequest;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -32,8 +33,7 @@ class EmailsController extends Controller {
     {
         $data = $request->input();
 
-        $customers_list = ['all' => '<ALL>']
-                        + Auth::user()->customers()->orderBy('name', 'asc')->lists('name', 'id')->all();
+        $customers_list = $this->customers_list();
 
         if ($data == null || $data['customer_id'] == 'all')
         {
@@ -45,7 +45,7 @@ class EmailsController extends Controller {
 
         foreach ($customers as $customer)
         {
-            $customer['emails'] = $customer->emails()->orderBy('list', 'desc')->get();
+            $customer['emails'] = $customer->emails()->orderBy('list', 'asc')->get();
         }
 
         return view('emails.index', compact(['customers', 'customers_list']));
@@ -140,7 +140,57 @@ class EmailsController extends Controller {
             $result = $this->isEmail($email, $list, $customer_id);
 
             return $result[0];
+        } else
+        {
+            return 'Incorrect request';
         }
+    }
+
+    /**
+     * Show a page to edit all the emails for the requested customer.
+     *
+     * @param $id
+     * @return \Illuminate\View\View
+     */
+    public function edit($id)
+    {
+        $email = Auth::user()->emails()->findOrFail($id);
+        $customer_name = Customer::name($email->customer_id)->first();
+
+        return view('emails.edit', compact(['email', 'customer_name']));
+    }
+
+    /**
+     * Update the requested email.
+     *
+     * @param UpdateEmailsRequest $request
+     * @param $id
+     * @return \redirect
+     */
+    public function update(UpdateEmailsRequest $request, $id)
+    {
+        $email = Auth::user()->emails()->findOrFail($id);
+
+        $email->update($request->except('customers'));
+
+        return redirect()->action('EmailsController@index');
+    }
+
+
+    /**
+     * Delete the requested email entry.
+     *
+     * @param $id
+     * @return \redirect
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $email = Auth::user()->emails()->findOrFail($id);
+
+        $email->delete();
+
+        return redirect()->action('EmailsController@index');
     }
 
     /*******************************************************************/
@@ -258,5 +308,10 @@ class EmailsController extends Controller {
         }
 
         return $result;
+    }
+
+    private function customers_list()
+    {
+        return ['all' => '<ALL>'] + Auth::user()->customers()->list()->all();
     }
 }

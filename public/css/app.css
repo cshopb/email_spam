@@ -1,3 +1,7 @@
+a {
+    text-decoration: none;
+}
+
 a.back-to-top {
     display: none;
     width: 55px;
@@ -20,8 +24,22 @@ a:hover.back-to-top {
     background: #2c3e50;
 }
 
+.edit {
+    color: #f39c12;
+    padding-right: 10px;
+}
+
+.delete {
+    color: #e74c3c;
+}
+
 span.back-to-top {
     vertical-align: middle;
+}
+
+div.black_list {
+    color: #ffffff;
+    background: #2c3e50;
 }
 
 .text-right {
@@ -48,6 +66,10 @@ span.back-to-top {
     height: 3px;
     background: #e74c3c;
     margin: 40px auto 0;
+}
+
+.panel-body div {
+    padding: 3px;
 }
 
 /*# sourceMappingURL=app.css.map */
