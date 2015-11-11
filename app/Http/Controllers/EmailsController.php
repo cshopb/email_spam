@@ -91,6 +91,7 @@ class EmailsController extends Controller {
      * Saves the provided emails.
      *
      * @param CommitEmailsRequest $request
+     * @return \redirect
      */
     public function store(CommitEmailsRequest $request)
     {
@@ -120,6 +121,8 @@ class EmailsController extends Controller {
                 }
             }
         }
+
+        return redirect()->action('EmailsController@index');
     }
 
     /**
@@ -193,6 +196,7 @@ class EmailsController extends Controller {
         return redirect()->action('EmailsController@index');
     }
 
+    //<editor-fold desc="Private Functions">
     /*******************************************************************/
     /*******************************************************************/
     /**                                                               **/
@@ -310,8 +314,14 @@ class EmailsController extends Controller {
         return $result;
     }
 
+    /**
+     * List for the drop down menu on index page.
+     *
+     * @return array
+     */
     private function customers_list()
     {
         return ['all' => '<ALL>'] + Auth::user()->customers()->list()->all();
     }
+    //</editor-fold>
 }

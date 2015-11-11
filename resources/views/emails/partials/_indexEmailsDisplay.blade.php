@@ -1,7 +1,15 @@
 @foreach($customers as $customer)
-    <div class="panel panel-info">
+    <div class="panel panel-primary">
         <div class="panel-heading">
-            <b>{!! $customer['name'] !!}</b>
+            <div class="row">
+                <div class="col-md-11">
+                    <b>{!! $customer['name'] !!}</b>
+                </div>
+                <div class="col-md-1 text-right">
+                    @include('partials._editCustomerLink')
+                    @include('partials._deleteCustomerLink')
+                </div>
+            </div>
         </div>
         <div class="panel-body">
             @foreach($customer['emails'] as $email)
@@ -12,20 +20,10 @@
                     {{ ucwords(str_replace('_', ' ', $email['list'])) }}
                 </div>
                 <div class="col-md-1 text-right {{ $email['list'] }}">
-                    <a href={{ action('EmailsController@edit', [$email['id']]) }} class="edit">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                    </a>
-                    <a data-toggle="modal"
-                       data-target="#deleteModal"
-                       data-id="{{ $email['id'] }}"
-                       data-email="{{ $email['email'] }}"
-                       class="delete">
-                            <span class="glyphicon glyphicon-remove"></span>
-                    </a>
+                    @include('partials._editEmailLink')
+                    @include('partials._deleteEmailLink')
                 </div>
             @endforeach
         </div>
     </div>
 @endforeach
-
-@include('emails.partials._deleteConfirmationModal')

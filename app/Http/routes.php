@@ -19,6 +19,11 @@ Route::get('emails/create/confirm', 'EmailsController@confirm');
 Route::resource('emails', 'EmailsController');
 Route::post('emails/create/refresh', 'EmailsController@refresh');
 
+// Customers
+Route::get('customers/{customers}/edit', 'CustomersController@edit');
+Route::patch('customers/{customers}', 'CustomersController@update');
+Route::delete('customers/{customers}', 'CustomersController@destroy');
+
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');

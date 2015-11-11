@@ -7,6 +7,10 @@
             @foreach($customers as $customer)
                 <tr>
                     <td>{{ $customer['name'] }}</td>
+                    <td class="text-right">
+                        @include('partials._editCustomerLink')
+                        @include('partials._deleteCustomerLink')
+                    </td>
                 </tr>
             @endforeach
         </table>

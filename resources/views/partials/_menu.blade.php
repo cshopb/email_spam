@@ -19,11 +19,11 @@
             <div class="container">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Test 2 <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">E-mails <b class="caret"></b></a>
 
                         <ul class="dropdown-menu">
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li><a href="#">Drop Down 2</a></li>
+                            <li><a href="/emails">List All</a></li>
+                            <li><a href="/emails/create">Add New</a></li>
                         </ul>
                     </li>
                     <li ><a href="/emails">E-mails</a></li>
@@ -32,7 +32,8 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li >
-                        {!! Form::open (['role' => 'search', 'class' => 'navbar-form', 'action' => 'SearchController@index']) !!}
+                        {!! Form::open
+                            (['role' => 'search', 'class' => 'navbar-form', 'action' => 'SearchController@index']) !!}
                         <div class="has-feedback">
                             <span class="glyphicon glyphicon glyphicon-search form-control-feedback"></span>
                             {!! Form::text('search', null, ['placeholder' => 'Search', 'class' => 'form-control']) !!}

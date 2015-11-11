@@ -11,6 +11,7 @@
         @if($customers != null)
             @include('search.partials._customerResults')
         @endif
-
     </div>
+
+    @include('partials._deleteConfirmationModal')
 @endsection

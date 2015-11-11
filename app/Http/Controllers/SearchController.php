@@ -30,8 +30,11 @@ class SearchController extends Controller {
         {
             $result['customers'] = Search::customers($result['search'])->all();
             $result['emails'] = Search::emails($result['search'])->all();
-        } else {
+        } else
+        {
             $result['search'] = "You didn't search for anything";
+            $result['customers'] = null;
+            $result['emails'] = null;
         }
 
         return view('search.index')->with($result);
