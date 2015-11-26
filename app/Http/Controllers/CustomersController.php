@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Email_spam\Facades\Flash;
 use App\Http\Requests\UpdateCustomersRequest;
 use Auth;
 use Illuminate\Http\Request;
@@ -28,6 +29,8 @@ class CustomersController extends Controller
 
         $customer->update($request->all());
 
+        Flash::message('Update successful.');
+
         return redirect()->action('EmailsController@index');
     }
 
@@ -36,6 +39,8 @@ class CustomersController extends Controller
         $customer = Auth::user()->customers()->findOrFail($id);
 
         $customer->delete();
+
+        Flash::error('User deleted.');
 
         return redirect()->action('EmailsController@index');
     }

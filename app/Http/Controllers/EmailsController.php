@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Customer;
 use App\Email;
+use App\Email_spam\Facades\Flash;
 use App\Http\Requests\CommitEmailsRequest;
 use App\Http\Requests\PrepareEmailsRequest;
 use App\Http\Requests\UpdateEmailsRequest;
@@ -122,6 +123,8 @@ class EmailsController extends Controller {
             }
         }
 
+        Flash::success('The new emails are added');
+
         return redirect()->action('EmailsController@index');
     }
 
@@ -172,9 +175,11 @@ class EmailsController extends Controller {
      */
     public function update(UpdateEmailsRequest $request, $id)
     {
-        $email = Auth::user()->emails()->findOrFail($id);
+        $email_old = $email = Auth::user()->emails()->findOrFail($id);
 
         $email->update($request->except('customers'));
+
+        Flash::message($email_old['email'] .' updated successfully to: ' .$email['email']);
 
         return redirect()->action('EmailsController@index');
     }
@@ -192,6 +197,8 @@ class EmailsController extends Controller {
         $email = Auth::user()->emails()->findOrFail($id);
 
         $email->delete();
+
+        Flash::error($email['email'] .'has been deleted');
 
         return redirect()->action('EmailsController@index');
     }

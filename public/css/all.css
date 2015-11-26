@@ -1908,6 +1908,13 @@ div.black_list {
     padding: 3px;
 }
 
+.alert {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 998;
+}
+
 /*# sourceMappingURL=app.css.map */
 
 /*# sourceMappingURL=all.css.map */

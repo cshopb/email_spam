@@ -152,6 +152,7 @@ return [
          */
 
         App\Email_spam\Search\SearchServiceProvider::class,
+        App\Email_spam\Notifications\FlashServiceProvider::class,
 
     ],
 
@@ -208,6 +209,7 @@ return [
          * My Facades...
          */
         'Search'    => App\Email_spam\Facades\Search::class,
+        'Flash'     => App\Email_spam\Facades\Flash::class,
     ],
 
 ];

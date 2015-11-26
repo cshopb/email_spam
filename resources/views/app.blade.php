@@ -22,6 +22,9 @@
 
     @include('partials._menu')
 
+    <!-- Flash message -->
+    @include('partials._flash')
+
     <div class="container">
         @yield('content')
     </div>
