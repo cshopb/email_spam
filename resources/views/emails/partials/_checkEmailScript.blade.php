@@ -16,12 +16,16 @@
                 var $parent = $emailInput.parent();
                 if (emailType == 'isEmail') {
                     $parent.attr('class', 'form-group has-success has-feedback');
+                    $parent.find('input').attr('title', '');
                     $parent.find('span').attr('class', 'glyphicon glyphicon-ok form-control-feedback');
                 } else if (emailType == 'notEmail') {
                     $parent.attr('class', 'form-group has-error has-feedback');
+                    $parent.find('input').attr('title', 'Please enter a valid Email.');
                     $parent.find('span').attr('class', 'glyphicon glyphicon-remove form-control-feedback');
                 } else if (emailType == 'emailExists') {
                     $parent.attr('class', 'form-group has-warning has-feedback');
+                    $parent.find('input').attr('title', 'The Email already exists in the opposite list. ' +
+                            'If left it will change to the currently selected list.');
                     $parent.find('span').attr('class', 'glyphicon glyphicon-warning-sign form-control-feedback');
                 }
             },

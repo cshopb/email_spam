@@ -4,6 +4,18 @@
     <!-- http://getbootstrap.com/css/#forms-control-validation -->
     <div class="form-group {{ $input_color_feedback[$email_count] }} has-feedback">
         <span class='glyphicon {{ $icon[$email_count] }} form-control-feedback'></span>
-        {!! Form::text('email[' .$email_count .']', $emails[$email_count], ['class' => 'form-control']) !!}
+        {!! Form::text(
+            'email[' .$email_count .']',
+            $emails[$email_count],
+            ['class'        => 'form-control',
+             'data-toggle'  => 'tooltip',
+             'title'        => $tooltip[$email_count]]
+        ) !!}
     </div>
 @endfor
+
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>

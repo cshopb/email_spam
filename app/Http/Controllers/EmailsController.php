@@ -204,13 +204,6 @@ class EmailsController extends Controller {
     }
 
     //<editor-fold desc="Private Functions">
-    /*******************************************************************/
-    /*******************************************************************/
-    /**                                                               **/
-    /**                       Private Functions                       **/
-    /**                                                               **/
-    /*******************************************************************/
-    /*******************************************************************/
 
     /**
      * Takes the provided list of emails and extracts them individually
@@ -220,8 +213,10 @@ class EmailsController extends Controller {
      */
     private function extractEmails($emails)
     {
-        // preg_replace with this setup will remove whitespace and space.
-        $emails = preg_replace('/\s+/', '', $emails);
+        // preg_replace with this setup will replace whitespace with semicolon.
+        $emails = preg_replace('/\s+/', ';', $emails);
+        // then if there are two semicolons next to each other it will change it to one.
+        $emails = preg_replace('/;;/', ';', $emails);
         $emails = explode(';', $emails);
 
         return $emails;
@@ -245,12 +240,16 @@ class EmailsController extends Controller {
         for ($email_no = 0; $email_no < count($emails); $email_no++)
         {
             $email_status[$email_no] = (filter_var($emails[$email_no], FILTER_VALIDATE_EMAIL)) ? 'isEmail' : 'notEmail';
-            // This was the only way I knew how to make it an array and not a collection. With lists->all.
-            $email_exists = Auth::user()->emails()->Exists($customer_id, $list_to_check, $emails[$email_no])
-                ->get(['email'])->all();
-            if ($email_exists != null)
+
+            if ($email_status[$email_no] == 'isEmail')
             {
-                $email_status[$email_no] = 'emailExists';
+                // This was the only way I knew how to make it an array and not a collection. With lists->all.
+                $email_exists = Auth::user()->emails()->Exists($customer_id, $list_to_check, $emails[$email_no])
+                    ->get(['email'])->all();
+                if ($email_exists != null)
+                {
+                    $email_status[$email_no] = 'emailExists';
+                }
             }
         }
 
@@ -277,15 +276,22 @@ class EmailsController extends Controller {
         $button_black_list = 'btn btn-primary';
         $panel_black_list = 'panel panel-primary';
 
-        //glyphicons
+        // Glyphicons
         $glyphicon_isEmail = 'glyphicon-ok';
         $glyphicon_notEmail = 'glyphicon-remove';
         $glyphicon_emailExists = 'glyphicon-warning-sign';
 
-        //input feedback colors
+        // Input feedback colors
         $isEmail_color = 'has-success';
         $notEmail_color = 'has-error';
         $emailExists_color = 'has-warning';
+
+        // Tooltip text
+        $tooltip_isEmail = '';
+        $tooltip_notEmail = 'Please enter a valid Email.';
+        $tooltip_emailExists = 'The Email already exists in the opposite list.
+                                If left it will change to the currently selected list.';
+
 
         if ($list == 'white_list')
         {
@@ -305,16 +311,17 @@ class EmailsController extends Controller {
             {
                 $result['icon'][$email_count] = $glyphicon_isEmail;
                 $result['input_color_feedback'][$email_count] = $isEmail_color;
+                $result['tooltip'][$email_count] = $tooltip_isEmail;
             } elseif ($isEmail[$email_count] == 'notEmail')
             {
                 $result['icon'][$email_count] = $glyphicon_notEmail;
                 $result['input_color_feedback'][$email_count] = $notEmail_color;
-            }
-
-            if ($isEmail[$email_count] == 'emailExists')
+                $result['tooltip'][$email_count] =$tooltip_notEmail;
+            } elseif ($isEmail[$email_count] == 'emailExists')
             {
                 $result['icon'][$email_count] = $glyphicon_emailExists;
                 $result['input_color_feedback'][$email_count] = $emailExists_color;
+                $result['tooltip'][$email_count] = $tooltip_emailExists;
             }
         }
 
